@@ -18,9 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('provider_id')->unique();
-            $table->enum('provider', [0, 1, 2, 3]);
-            $table->string('img_src');
+            $table->enum('provider_type', [0, 1, 2])->default(0);
+            $table->string('img_src')->nullable();
+            $table->tinyInteger('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

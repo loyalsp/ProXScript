@@ -28,9 +28,18 @@ class SocialController extends Controller
      */
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('google')->user();
+        $user_ = $this->authenticateSocialUser($user, '2');
 
-        // $user->token;
+        if (!$user_) {
+            $user = User::where('email', $user->email)->first();
+            $message = $this->getFailMessage($user->provider_type);
+            return redirect()->route('login')->with(['fail' => $message]);
+        } else {
+            $user_ = User::where('email', $user->email)->first();
+            Auth::loginUsingId($user_->id);
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -51,30 +60,21 @@ class SocialController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-        $user_ = User::where('email',$user->email)
-            ->where('provider',1)->first();
-        if(!is_null($user_))
-        {
+        $user_ = $this->authenticateSocialUser($user, '1');
+
+        if (!$user_) {
+            $user = User::where('email', $user->email)->first();
+            $message = $this->getFailMessage($user->provider_type);
+            return redirect()->route('login')->with(['fail' => $message]);
+        } else {
+            $user_ = User::where('email', $user->email)->first();
             Auth::loginUsingId($user_->id);
             return redirect()->route('home');
         }
-        $new_user = new User();
-
-
-        $new_user->email = $user->email;
-        $new_user->name = $user->name;
-        $new_user->provider = 1;
-        $new_user->provider_id = $user->id;
-        $new_user->password = bcrypt($pwd =$this->generateRandomString(8));
-        $new_user->img_src = $user->avatar_original;
-        if($new_user->save())
-        {
-            Auth::user($user,true);
-            return response()->json(array('success' => $pwd));
-        }
-        return response()->json(array('fail' => "failed"));
     }
-    private function generateRandomString($length = 10) {
+
+    private function generateRandomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvw*xyz_).#&ABCDE+=FGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -82,5 +82,45 @@ class SocialController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    private function authenticateSocialUser($user, $type)
+    {
+        $user_ = User::where('email', $user->email)->first();
+        if (!is_null($user_)) {
+            if ($user_->provider_type == $type)
+                return $user_;
+        } elseif (!is_null($user_))
+            return false;
+        else {
+            $new_user = new User();
+            $new_user->email = $user->email;
+            $new_user->name = $user->name;
+            $new_user->provider_type = $type;
+            $new_user->password = bcrypt(/*$pwd = $this->generateRandomString(8)*/
+                123456);
+            $new_user->img_src = $user->avatar_original;
+            if ($new_user->save())
+                return $new_user;
+            else return false;
+        }
+    }
+
+    private function getFailMessage($provider)
+    {
+        switch ($provider) {
+            case '1';
+                $message = "This Social Login email is authenticated with google. Please Try Login With Google";
+                break;
+
+            case '2';
+                $message = "This Social Login email is authenticated with Facebook. Please Try Login With Facebook";
+                break;
+
+            default;
+                $message = "Default";
+                break;
+        }
+        return $message;
     }
 }

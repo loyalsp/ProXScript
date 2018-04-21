@@ -67,6 +67,17 @@
                             </div>
                         </div>
                     </form>
+                    @if(Session::has('fail'))
+                        <section class="info-box fail">
+                            {{Session::get('fail')}}
+                        </section>
+                    @endif
+
+                    @if(Session::has('success'))
+                        <section class="info-box success">
+                            {{Session::get('success')}}
+                        </section>
+                    @endif
                 </div>
             </div>
         </div>

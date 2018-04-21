@@ -39,19 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Username</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="text" class="form-control" name="username" value="{{ old('username') }}" required>
-
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
@@ -89,6 +77,17 @@
                             </div>
                         </div>
                     </form>
+                    @if(Session::has('fail'))
+                        <section class="info-box fail">
+                            {{Session::get('fail')}}
+                        </section>
+                    @endif
+
+                    @if(Session::has('success'))
+                        <section class="info-box success">
+                            {{Session::get('success')}}
+                        </section>
+                    @endif
                 </div>
             </div>
         </div>

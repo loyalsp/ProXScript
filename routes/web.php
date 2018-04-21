@@ -25,3 +25,14 @@ Route::get('/auth/facebook/callback', 'Auth\SocialController@handleFacebookCallb
 
 Route::get('/auth/google', 'Auth\SocialController@redirectToGoogle');
 Route::get('/auth/google/callback', 'Auth\SocialController@handleGoogleCallback');
+
+
+
+Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
+Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login');
+Route::get('/logout', 'Auth\AdminLoginController@logout')->name('log_out');
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/admin', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('/admin1', 'Admin\AdminController@index1');
+});

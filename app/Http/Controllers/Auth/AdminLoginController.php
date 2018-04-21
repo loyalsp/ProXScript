@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        $request->merge(['is_admin' => '0']);
+        $request->merge(['is_admin' => '1']);
         return $this->guard()->attempt(
             $this->credentials($request), $request->filled('remember')
         );
@@ -49,5 +49,9 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         return $request->only($this->username(), 'password','is_admin');
+    }
+    public function showLoginForm()
+    {
+        return view('auth.admin-login');
     }
 }
