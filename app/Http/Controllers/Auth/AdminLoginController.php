@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminLoginController extends Controller
 {
@@ -53,5 +55,23 @@ class AdminLoginController extends Controller
     public function showLoginForm()
     {
         return view('auth.admin-login');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        Session::put('is_admin',true);
+    }
+
+    public function logout(Request $request)
+    {
+        if(Auth::user()->is_admin==1 && Session::get('is_admin'))
+           $route = "/admin";
+        else $route = "/login";
+        $this->guard()->logout();
+        Session::flush();
+        Session::regenerate();
+        $request->session()->invalidate();
+
+        return redirect($route);
     }
 }

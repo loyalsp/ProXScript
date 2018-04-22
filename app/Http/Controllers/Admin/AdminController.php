@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -26,5 +27,18 @@ class AdminController extends Controller
         }
         Auth::logout();
         return redirect()->route('login');
+    }
+    public function switch_()
+    {
+        if(Session::get('is_admin'))
+        {
+            Session::put('is_admin',false);
+            return redirect()->route('home');
+        }
+        else if(!Session::get('is_admin'))
+        {
+            Session::put('is_admin',true);
+            return redirect()->route('admin.index');
+        }
     }
 }
