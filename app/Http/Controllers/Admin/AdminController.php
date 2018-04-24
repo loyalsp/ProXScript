@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -12,19 +13,19 @@ class AdminController extends Controller
     {
         return view('admin-home');
     }
-    public function index1()
+
+    public function switch_()
     {
-        return "I am Admin 1";
-    }
-    public function logout()
-    {
-        $user = Auth::user();
-        if(!is_null($user) && $user->is_admin==1)
+        if(!is_null(Session::get('adminAsUser')) && !Session::get('adminAsUser'))
         {
-            Auth::logout();
-            return redirect()->route('admin.login');
+            Session::put('adminAsUser',true);
+            return redirect()->route('home');
         }
-        Auth::logout();
-        return redirect()->route('login');
+        else if(Session::get('adminAsUser'))
+        {
+            Session::put('adminAsUser',false);
+            return redirect()->route('admin.index');
+        }
+        else return response("Not Authorized",404);
     }
 }

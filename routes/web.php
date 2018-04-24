@@ -30,9 +30,13 @@ Route::get('/auth/google/callback', 'Auth\SocialController@handleGoogleCallback'
 
 Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
 Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login');
-Route::get('/logout', 'Auth\AdminLoginController@logout')->name('log_out');
+
+
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin', 'Admin\AdminController@index')->name('admin.index');
     Route::get('/admin1', 'Admin\AdminController@index1');
 });
+
+Route::get('/switch/role', 'Admin\AdminController@switch_')->name('switch');
+Route::post('/logout', 'Auth\AdminLoginController@logout')->name('logout');

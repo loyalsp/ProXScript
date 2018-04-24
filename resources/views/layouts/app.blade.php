@@ -51,7 +51,6 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -63,6 +62,13 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                    </li>
+
+                                    <li>
+                                        @if(Session::get('adminAsUser') || (!is_null(Session::get('adminAsUser')) && !Session::get('adminAsUser')))
+                                        <a href="{{ route('switch') }}">{{!Session::get('adminAsUser')?'Login As User':'Login As Admin'}}
+                                        </a>
+                                            @endif
                                     </li>
                                 </ul>
                             </li>
