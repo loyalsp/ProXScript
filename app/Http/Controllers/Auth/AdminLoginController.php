@@ -59,18 +59,18 @@ class AdminLoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        Session::put('is_admin',true);
+        Session::put('adminAsUser',false);
     }
 
     public function logout(Request $request)
     {
-        if(Auth::user()->is_admin==1 && Session::get('is_admin'))
+        if(Auth::user()->is_admin==1 || Session::get('adminAsUser'))
            $route = "/admin";
         else $route = "/login";
         $this->guard()->logout();
         Session::flush();
         Session::regenerate();
-        $request->session()->invalidate();
+       // $request->session()->invalidate();
 
         return redirect($route);
     }

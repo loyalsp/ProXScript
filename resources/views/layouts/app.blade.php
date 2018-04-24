@@ -64,8 +64,8 @@
                                     </li>
 
                                     <li>
-                                        @if(Session::get('is_admin') || (!is_null(Session::get('is_admin')) && !Session::get('is_admin')))
-                                        <a href="{{ route('switch') }}">{{Session::get('is_admin')?'Login As User':'Login As Admin'}}
+                                        @if(Session::get('adminAsUser') || (!is_null(Session::get('adminAsUser')) && !Session::get('adminAsUser')))
+                                        <a href="{{ route('switch') }}">{{!Session::get('adminAsUser')?'Login As User':'Login As Admin'}}
                                         </a>
                                             @endif
                                     </li>

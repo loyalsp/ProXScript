@@ -18,7 +18,7 @@ class User
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        if (!is_null($user) && Auth::user()->is_admin == 0 || !Session::get('is_admin')) {
+        if (!is_null($user) && Auth::user()->is_admin == 0 || Session::get('adminAsUser')) {
             return $next($request);
         }
 

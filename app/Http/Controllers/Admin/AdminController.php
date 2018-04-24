@@ -13,32 +13,19 @@ class AdminController extends Controller
     {
         return view('admin-home');
     }
-    public function index1()
-    {
-        return "I am Admin 1";
-    }
-    public function logout()
-    {
-        $user = Auth::user();
-        if(!is_null($user) && $user->is_admin==1)
-        {
-            Auth::logout();
-            return redirect()->route('admin.login');
-        }
-        Auth::logout();
-        return redirect()->route('login');
-    }
+
     public function switch_()
     {
-        if(Session::get('is_admin'))
+        if(!is_null(Session::get('adminAsUser')) && !Session::get('adminAsUser'))
         {
-            Session::put('is_admin',false);
+            Session::put('adminAsUser',true);
             return redirect()->route('home');
         }
-        else if(!Session::get('is_admin'))
+        else if(Session::get('adminAsUser'))
         {
-            Session::put('is_admin',true);
+            Session::put('adminAsUser',false);
             return redirect()->route('admin.index');
         }
+        else return response("Not Authorized",404);
     }
 }
