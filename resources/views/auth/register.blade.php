@@ -1,14 +1,59 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+
+<!--Start breadcrumb area-->     
+<section class="breadcrumb-area" style="background-image: url(images/resources/breadcrumb-bg.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumbs">
+                    <h1>Register</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="left pull-left">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                            <li class="active">Register</li>
+                        </ul>
+                    </div>
+                    <div class="right pull-right">
+                        <a href="#">
+                            <span><i class="fa fa-share-alt" aria-hidden="true"></i>Share</span> 
+                        </a>   
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End breadcrumb area-->
+
+
+<!--Start contact area-->
+<section class="contact-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact-form">
+                    <div class="sec-title text-center">
+                        <h1>REGISTER</h1>
+                        <div class="overlay-title">
+                            <h2>Register On Cryptocogent</h2> 
+                        </div>   
+                    </div>
+
+
+
+                      <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -88,9 +133,13 @@
                             {{Session::get('success')}}
                         </section>
                     @endif
+
+
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
 @endsection
