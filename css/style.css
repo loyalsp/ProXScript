@@ -4714,6 +4714,7 @@ select:focus {
 }
 .contact-area .contact-form { }
 .contact-area .contact-form form input[type="text"],
+.contact-area .contact-form form input[type="password"],
 .contact-area .contact-form form input[type="email"],
 .contact-area .contact-form form textarea{
     border: 1px solid #f4f4f4;
@@ -4732,6 +4733,9 @@ select:focus {
     padding: 10px 20px;
 }
 .contact-area .contact-form form input[type="text"]:focus{
+    border-color: #3d4394;        
+}
+.contact-area .contact-form form input[type="password"]:focus{
     border-color: #3d4394;        
 }
 .contact-area .contact-form form input[type="email"]:focus{
