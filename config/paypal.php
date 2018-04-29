@@ -7,8 +7,8 @@
  */
 return array(
     /** set your paypal credential **/
-    'client_id' =>'AQf-xPpvTFB6NwIvQOPfR3U86bmTGjYJ7Fc3zYAeg6K5bMjl8DvP0nkpd--wqNU5rOQ9chF2aJH5v70R',
-    'secret' => 'EOZ-BSTpr_fd9Qjp-r-AClsovDvsYrpLhBG8X3fmxentAd1vDHxX0DMNSwiy0ujmGhI55acMHj9Eq2Bg',
+    'client_id' =>'',
+    'secret' => '',
     /**
      * SDK configuration
      */

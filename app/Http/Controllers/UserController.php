@@ -41,12 +41,14 @@ private $userDao;
             ->filter(function ($query) use ($request) {
                 $search = $request->search;
                 $search_for = $search['value'];
+                if ($search_for!="") {
+                    $query->where('email', 'LIKE', "%$search_for%")
+                        ->orWhere('name', 'LIKE', "%$search_for%");
+                }
                 if ($request->has('id') && $request->id!='Select Filter') {
                     $query->where('status', $request->id);
                 }
-                if ($search_for!="") {
-                    $query->where('email', $search_for);
-                }
+
             })
             ->make();
     }
