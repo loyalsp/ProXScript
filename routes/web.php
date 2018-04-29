@@ -26,6 +26,9 @@ Route::get('/auth/facebook/callback', 'Auth\SocialController@handleFacebookCallb
 Route::get('/auth/google', 'Auth\SocialController@redirectToGoogle');
 Route::get('/auth/google/callback', 'Auth\SocialController@handleGoogleCallback');
 
+Route::get('/admin/users', 'UserController@getUsersPage');
+Route::get('/get/users', 'UserController@getBasicData')->name('getUsers');
+
 
 
 Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
@@ -40,3 +43,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::get('/switch/role', 'Admin\AdminController@switch_')->name('switch');
 Route::post('/logout', 'Auth\AdminLoginController@logout')->name('logout');
+
+
+Route::get('pay-with-paypal', 'Admin\Billings\PayPalController@payWithPayPal')->name('payWithPayPal');
+Route::post('paypal','Admin\Billings\PayPalController@postPaymentWithPayPal')->name('post_payment_paypal');
+Route::get('paypal/status',  'Admin\Billings\PayPalController@getPaymentStatus')->name('payPal.payment.status');

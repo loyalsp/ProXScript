@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->enum('provider_type', [0, 1, 2])->default(0);
             $table->string('img_src')->nullable();
             $table->tinyInteger('is_admin')->default(false);
+            $table->tinyInteger('status')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
