@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/aboutus', function(){
+	return view('aboutus');
+});
+
+Route::get('/services', 'ServicesController@index')->name('services');
+
+Route::get('/keywordtrading', 'ServicesController@keywordtrading')->name('keywordtrading');
+
 Auth::routes();
 
 
