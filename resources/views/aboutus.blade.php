@@ -1,12 +1,5 @@
-@extends('layouts.header')
-
-
+@extends('layouts.master')
 @section('content')
-
-
-
-
-
 <!--Start breadcrumb area-->     
 <section class="breadcrumb-area" style="background-image: url(images/resources/breadcrumb-bg.jpg);">
 	<div class="container">
@@ -47,7 +40,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="img-holder">
-                    <img src="images/about/about-us.jpg" alt="Awesome Image">    
+                    <img src="{{ asset('images/about/about-us.jpg')}}" alt="Awesome Image">
                 </div>    
             </div>
             <div class="col-md-4">
@@ -183,7 +176,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/1.jpg" alt="Awesome Image">    
+                                            <img src="{{ asset('images/history/1.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>Started at Newyork City</h3>
@@ -199,7 +192,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/2.jpg" alt="Awesome Image">    
+                                            <img src="{{ asset('images/history/2.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>Got Best Industrial Award</h3>
@@ -217,7 +210,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/3.jpg" alt="Awesome Image">    
+                                            <img src="{{ asset('images/history/3.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>8 New Branches Opened</h3>
@@ -233,7 +226,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/4.jpg" alt="Awesome Image">    
+                                            <img src="{{ asset('images/history/4.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>Reached 100% Target</h3>
@@ -257,7 +250,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/1.jpg" alt="Awesome Image">    
+                                            <img src="{{asset('images/history/1.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>Started at Newyork City</h3>
@@ -273,7 +266,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/2.jpg" alt="Awesome Image">    
+                                            <img src="{{asset('images/history/2.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>Got Best Industrial Award</h3>
@@ -291,7 +284,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/3.jpg" alt="Awesome Image">    
+                                            <img src="{{asset('images/history/3.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>8 New Branches Opened</h3>
@@ -307,7 +300,7 @@
                                     </div>
                                     <div class="right-content">
                                         <div class="img-box">
-                                            <img src="images/history/4.jpg" alt="Awesome Image">    
+                                            <img src="{{asset('images/history/4.jpg')}}" alt="Awesome Image">
                                         </div>
                                         <div class="text-box">
                                             <h3>Reached 100% Target</h3>
@@ -462,13 +455,13 @@
                 <div class="achivement-logo">
                     <ul>
                         <li>
-                            <img src="images/brand/achivement-1.png" alt="Awesome Brand Image">    
+                            <img src="{{asset('images/brand/achivement-1.png')}}" alt="Awesome Brand Image">
                         </li>
                         <li>
-                            <img src="images/brand/achivement-2.png" alt="Awesome Brand Image">    
+                            <img src="{{asset('images/brand/achivement-2.png')}}" alt="Awesome Brand Image">
                         </li>
                         <li>
-                            <img src="images/brand/achivement-3.png" alt="Awesome Brand Image">    
+                            <img src="{{asset('images/brand/achivement-3.png')}}" alt="Awesome Brand Image">
                         </li>
                     </ul>
                 </div>    
@@ -492,7 +485,7 @@
             <div class="col-md-4">
                 <div class="single-team-member">
                     <div class="img-holder">
-                        <img src="images/team/1.jpg" alt="Awesome Image">
+                        <img src="{{asset('images/team/1.jpg')}}" alt="Awesome Image">
                         <div class="overlay-style-one">
                             <div class="box">
                                 <div class="content">
@@ -520,7 +513,7 @@
             <div class="col-md-4">
                 <div class="single-team-member">
                     <div class="img-holder">
-                        <img src="images/team/2.jpg" alt="Awesome Image">
+                        <img src="{{asset('images/team/2.jpg')}}" alt="Awesome Image">
                         <div class="overlay-style-one">
                             <div class="box">
                                 <div class="content">
@@ -548,7 +541,7 @@
             <div class="col-md-4">
                 <div class="single-team-member">
                     <div class="img-holder">
-                        <img src="images/team/3.jpg" alt="Awesome Image">
+                        <img src="{{asset('images/team/3.jpg')}}" alt="Awesome Image">
                         <div class="overlay-style-one">
                             <div class="box">
                                 <div class="content">
@@ -586,32 +579,32 @@
                 <div class="brand">
                     <!--Start single item-->
                     <div class="single-item">
-                        <a href="#"><img src="images/brand/1.png" alt="Awesome Brand Image"></a>
+                        <a href="#"><img src="{{asset('images/brand/1.png')}}" alt="Awesome Brand Image"></a>
                     </div>
                     <!--End single item-->
                     <!--Start single item-->
                     <div class="single-item">
-                        <a href="#"><img src="images/brand/2.png" alt="Awesome Brand Image"></a>
+                        <a href="#"><img src="{{asset('images/brand/2.png')}}" alt="Awesome Brand Image"></a>
                     </div>
                     <!--End single item-->
                     <!--Start single item-->
                     <div class="single-item">
-                        <a href="#"><img src="images/brand/3.png" alt="Awesome Brand Image"></a>
+                        <a href="#"><img src="{{asset('images/brand/3.png')}}" alt="Awesome Brand Image"></a>
                     </div>
                     <!--End single item-->
                     <!--Start single item-->
                     <div class="single-item">
-                        <a href="#"><img src="images/brand/4.png" alt="Awesome Brand Image"></a>
+                        <a href="#"><img src="{{asset('images/brand/4.png')}}" alt="Awesome Brand Image"></a>
                     </div>
                     <!--End single item-->
                     <!--Start single item-->
                     <div class="single-item">
-                        <a href="#"><img src="images/brand/5.png" alt="Awesome Brand Image"></a>
+                        <a href="#"><img src="{{asset('images/brand/5.png')}}" alt="Awesome Brand Image"></a>
                     </div>
                     <!--End single item-->
                     <!--Start single item-->
                     <div class="single-item">
-                        <a href="#"><img src="images/brand/6.png" alt="Awesome Brand Image"></a>
+                        <a href="#"><img src="{{asset('images/brand/6.png')}}" alt="Awesome Brand Image"></a>
                     </div>
                     <!--End single item-->
                 </div>

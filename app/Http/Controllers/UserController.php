@@ -46,7 +46,7 @@ private $userDao;
                         ->orWhere('name', 'LIKE', "%$search_for%");
                 }
                 if ($request->has('id') && $request->id!='Select Filter') {
-                    $query->where('status', $request->id);
+                    $query->where('verified', $request->id);
                 }
 
             })

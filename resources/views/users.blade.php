@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
+{{--
 @section('style')
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/datatables/dataTables.bootstrap.min.css') }}" rel="stylesheet">
@@ -65,7 +66,7 @@
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
-                    {data: 'action', name: 'action',orderable: false, searchable: false},
+                    {data: 'action', name: 'action',orderable: false, searchable: false}
                 ]
             });
 $(document).ready(function () {
@@ -84,4 +85,4 @@ $(document).ready(function () {
  }
 
     </script>
-@endsection
+@endsection--}}
