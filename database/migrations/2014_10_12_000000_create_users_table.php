@@ -21,7 +21,10 @@ class CreateUsersTable extends Migration
             $table->enum('provider_type', [0, 1, 2])->default(0);
             $table->string('img_src')->nullable();
             $table->tinyInteger('is_admin')->default(false);
+            $table->tinyInteger('banned')->default(false);
             $table->tinyInteger('verified')->default(false);
+            $table->double('paypal_balance', 8, 2)->default(false);
+            $table->double('others', 8, 2)->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

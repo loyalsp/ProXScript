@@ -1,3 +1,4 @@
+{{--
 <div class="preloader"></div>
 <section class="top-bar-area">
     <div class="container">
@@ -19,4 +20,4 @@
             </div>
         </div>
     </div>
-</section>
+</section>--}}

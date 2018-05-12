@@ -84,3 +84,7 @@
 <!-- thm custom script -->
 
 <script src="{{ asset('js/custom.js') }}"></script>
+
+<script>
+    var token = "{{Session::token()}}";
+</script>

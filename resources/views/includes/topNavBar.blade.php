@@ -58,8 +58,8 @@
                                 <li><a href="login">Login</a></li>
                                 @else
                                     <li class="dropdown"><a href="#">{{ Auth::user()->name }}</a>
-                                        <ul>
-                                            <li><a href="#">Paypal</a></li>
+                                         <ul>
+                                            <li><a href="#">PayPal Balance: &nbsp;&nbsp;{{$user->paypal_balance}} $</a></li>
                                             <li><a href="#">Bitcoins </a></li>
                                             <li> <a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();

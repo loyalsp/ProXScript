@@ -64,7 +64,7 @@ abstract class AbstractCommonBehaviors implements RepositoryInterface
      */
     public function getRecordById($id)
     {
-        return $this->model->find($id);
+        return $this->model->findOrFail($id);
 
     }
 
@@ -73,22 +73,15 @@ abstract class AbstractCommonBehaviors implements RepositoryInterface
      * @param $value
      * @return mixed
      */
-    public function getRecordByAttribute($column, $value)
+    public function getRecordsByAttributesValues(array $attributes, array $ColumnsToSelect)
     {
-        //parameter 1 is must be column name and the second parameter must be value of column
-        return $this->model->where($column, $value)->first();
+
+        foreach ($attributes as $key => $value)
+        {
+            $model = $this->model->where($key, $value);
+        }
+        return $model->select($ColumnsToSelect);
         //OR static context "return User::where($column,$att)->first();"
-    }
-
-    /**
-     * @param $column
-     * @param $value
-     * @return mixed
-     */
-    public function deleteRecordByAtt($column, $value)
-    {
-        //return true if success
-        return $this->getRecordByAttribute($column,$value)->delete();
     }
 
     /**
@@ -116,12 +109,32 @@ abstract class AbstractCommonBehaviors implements RepositoryInterface
      * @param array $attributes
      * @return mixed
      */
-    public function updateRecord($id, array $attributes)
+    public function updateRecord($id,array $attributes)
     {
-        $this->model = $this->getRecordById($id);
-        return $this->model->update($attributes);
+        $model = $this->getRecordById($id);
+        foreach ($attributes as $key => $value)
+        {
+            $model->$key = $value;
+        }
+        return $model->update();
     }
 
+    public function getMultipleRecordsByFieldValues($field,array $values)
+    {
+        return $this->model->whereIn($field, $values);
+    }
+
+    public function updateMultipleRecordsByFieldValues($field ,array $values, array $attributes)
+    {
+        $model = $this->getMultipleRecordsByFieldValues($field,$values);
+        return $model->update($attributes);
+
+    }
+
+    public function deleteRecordByValue($field,array $values)
+    {
+        return $this->getMultipleRecordsByFieldValues($field,$values)->delete();
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws RepositoryException

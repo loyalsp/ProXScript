@@ -42,6 +42,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/users', 'UserController@getUsersPage');
     Route::get('/get/users', 'UserController@getBasicData')->name('getUsers');
     Route::get('/switch/role', 'Admin\AdminController@switch_')->name('switch');
+    Route::post('/do-actions', 'Admin\AdminController@action')->name('action');
 });
 
 Route::post('/logout', 'Auth\AdminLoginController@logout')->name('logout');
@@ -52,6 +53,9 @@ Route::group(['middleware' => 'user'], function () {
     });
     Route::get('/services', 'ServicesController@index')->name('services');
     Route::get('/keywordtrading', 'ServicesController@keywordtrading')->name('keywordtrading');
+    Route::get('pay-with-paypal', 'Admin\Billings\PayPalController@payWithPayPal')->name('payWithPayPal');
+    Route::post('paypal','Admin\Billings\PayPalController@postPaymentWithPayPal')->name('post_payment_paypal');
+    Route::get('paypal/status',  'Admin\Billings\PayPalController@getPaymentStatus')->name('payPal.payment.status');
 /*Adi from now on please put the user routes here.*/
 /*Authenticated user can execute these routes*/
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Billings;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -19,12 +20,14 @@ use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
+use Repositories\Eloquent\UserDao;
 
 class PayPalController extends Controller
 {
 
 
     private $_api_context;
+    private $userDao;
 
     /**
 
@@ -36,11 +39,11 @@ class PayPalController extends Controller
 
      */
 
-    public function __construct()
+    public function __construct(UserDao $userDao)
 
     {
 
-      //  parent::__construct();
+      $this->userDao = $userDao;
 
 
 
@@ -240,12 +243,24 @@ class PayPalController extends Controller
 
         if ($result->getState() == 'approved') {
 
-            dd($result);
+            $m = (json_decode($result));
+            $transactions = $m->transactions;
+            $array = $transactions[0];
+            $amount = $array->amount;
+            $total = $amount->total;
+           $user = Auth::user();
+           $bal = $user->paypal_balance;
+            $total =  $bal + $total;
+            $updated = $this->userDao->updateRecord($user->id,['paypal_balance' => $total]);
+
 
             /** it's all right **/
 
             /** Here Write your database logic like that insert record or value in database if you want **/
-
+            if($updated)
+            {
+                dd($m);
+            }
             Session::put('success','Payment success');
 
             return Redirect::route('payWithPayPal');

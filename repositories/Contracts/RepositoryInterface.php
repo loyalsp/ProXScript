@@ -16,7 +16,9 @@ interface RepositoryInterface
     public function updateRecord($id, array $attributes);
     public function getAllRecords();
     public function getRecordById($id);
-    public function getRecordByAttribute($column, $value);
+    public function getRecordsByAttributesValues(array $attributes, array $ColumnsToSelect);
+    public function getMultipleRecordsByFieldValues($field,array $values);
     public function deleteRecord($id);
+    public function deleteRecordByValue($field,array $values);
     //public function resetModel();
 }

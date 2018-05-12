@@ -17,6 +17,7 @@ class User
      */
     public function handle($request, Closure $next)
     {
+        view()->share('user', Auth::user());
         $user = Auth::user();
         if (!is_null($user) && Auth::user()->is_admin == 0 || Session::get('adminAsUser')) {
             return $next($request);
